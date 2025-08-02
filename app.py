@@ -4,19 +4,19 @@ import os
 from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
 import smtplib
-import traceback
 
 app = Flask(__name__)
-app.debug = True  # Debug mode enabled
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://go_todo_task_db_user:z3YSJb1og6V5aDVXuJqv9Kgsn7VgBpTO@dpg-d20liqndiees739m4op0-a.oregon-postgres.render.com/go_todo_task_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_databse.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your_secret_key'
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-
-
 db = SQLAlchemy(app=app)
 ckeditor = CKEditor(app)
+app.secret_key = 'your_secret_key'
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# ✅ Ensure the upload folder exists (non-intrusive, does not change logic)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 class PROJECT_POSTS(db.Model):
     __tablename__ = 'PROJECTS'
@@ -60,25 +60,21 @@ Please respond to the sender at your earliest convenience.
 Best regards,  
 Portfolio Website Notification System
 """
-        try:
-            with smtplib.SMTP_SSL("smtp.gmail.com", port=465) as connection:
-                connection.login(user=sender_mail, password=password)
-                connection.sendmail(
-                    from_addr=sender_mail,
-                    to_addrs='siddiqui.maaz79@gmail.com',
-                    msg=message.encode("utf-8")
-                )
-            print("Mail Sent")
-        except Exception as e:
-            print("Mail sending failed:", e)
-            traceback.print_exc()
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", port=465) as connection:
+            connection.login(user=sender_mail, password=password)
+            connection.sendmail(
+                from_addr=sender_mail,
+                to_addrs='siddiqui.maaz79@gmail.com',
+                msg=message.encode("utf-8")
+            )
+        print("Mail Sent")
 
     return render_template('index.html', all_post=p)
 
 @app.route('/add-new-project', methods=['GET', 'POST'])
 def add_new_project():
     if request.method == 'POST':
-        print("POST request received")
         title = request.form.get('title')
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
@@ -98,10 +94,10 @@ def add_new_project():
             )
             db.session.add(new_post)
             db.session.commit()
+
             flash('ADDED', 'success')
         except Exception as e:
             flash(f'ERROR: {e}', 'danger')
-            traceback.print_exc()
         return render_template('new_pro.html')
 
     return render_template('new_pro.html')
