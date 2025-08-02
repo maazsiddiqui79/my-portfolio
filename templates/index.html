@@ -1,7 +1,10 @@
-{% extends 'base.html' %} {% block title %}Maaz | Portfolio{% endblock %} {%
-block head %}
+{% extends 'base.html' %} 
+{% block title %}Maaz | Portfolio{% endblock %} 
+{% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-{% endblock %} {% block body %}
+{% endblock %} 
+
+{% block body %}
 <div class="main-wrapper px-4 py-5" style="margin-top: 50px">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
@@ -9,15 +12,11 @@ block head %}
         src="{{url_for('static',filename='my_img.jpg')}}"
         class="my-img"
         alt="my img"
-        width="700"
-        height="500"
       />
     </div>
     <div class="col-lg-6">
       <h1 class="display-1 fw-bolder text-body-emphasis lh-1 mb-3">
-        <span style="color: rgba(13, 110, 253, 0.9); font-family: 'Cambria'"
-          >@</span
-        >the-maaz
+        <span style="color: rgba(13, 110, 253, 0.9); font-family: 'Cambria'">@</span>the-maaz
       </h1>
       <h4 class="display-6 fw-bold">Python Full Stack Developer</h4>
 
@@ -46,67 +45,5 @@ block head %}
 <hr class="custom-hr" />
 <div id="about">{% include 'about.html' %}</div>
 <hr class="custom-hr" />
-<section class="container col-xl-8">
-  <div class="row py-lg-5">
-    <div class="container col-xl-8 mt-5">
-      <h3
-        class="display-5 fw-bolder text-body-emphasis lh-1 mb-3"
-        style="font-family: 'Cambria'"
-      >
-        MY DEVELOPER STATS
-      </h3>
-      <p class="lead text-body-secondary">Every Project Tells a Story.</p>
-    </div>
-  </div>
-</section>
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-    <div class="row justify-content-center">
-
-      <!-- Card 1: Projects Built -->
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card1 p-3">
-          <figure class="p-3 mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Completed Projects</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+70</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-
-      <!-- Card 2: Deployed -->
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card1 p-3">
-          <figure class="p-3 mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Deployed Projects</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+5</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-      <!-- Card 2: Deployed -->
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card1 p-3">
-          <figure class="p-3 mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Gui <br>Applications</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+6</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</div>
-
-<hr class="custom-hr" />
 <div id="connect">{% include 'connect.html' %}</div>
-
 {% endblock %}
