@@ -22,17 +22,19 @@ background-position: center;
     text-align: center;
   }
 </style>
-{% endblock %} {% block body %}
+{% endblock %} 
+{% block body %}
 
 <div class="project-bg">
     <p class="para"><span style="font-size:45px;">{{post.title}}</span><br>{{post.s_description}}</p>
-  <!-- Content -->
+    <!-- Content -->
 </div>
+<hr>
+<a href="/delete-maaz-project/{{post.id}}" class="btn btn-outline-dark">Delete  the projects</a>
 <hr>
 {{post.body|safe}}
 
 
-<a href="/delete-maaz-project/{{post.id}}" class="btn btn-outline-dark">Delete  the projects</a>
 
 
 {% endblock %}
