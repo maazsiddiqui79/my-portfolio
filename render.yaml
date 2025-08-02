@@ -1,7 +1,6 @@
 services:
   - type: web
-    name: portfolio-app
+    name: maaz-portfolio
     env: python
     buildCommand: ""
     startCommand: gunicorn app:app
-    plan: free
