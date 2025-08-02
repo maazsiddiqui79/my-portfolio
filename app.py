@@ -114,6 +114,12 @@ def maaz_project(id):
     post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
     return render_template("specific-project.html", post=post)
 
+
+@app.route("/maaz-project-edit/<id>")
+def maaz_project_edit(id):
+    post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
+    return render_template("specific-project.html", post=post)
+
 with app.app_context():
     db.create_all()
 
