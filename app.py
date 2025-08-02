@@ -104,10 +104,11 @@ def add_new_project():
     return render_template('new_pro.html')
 
 
-@app.route('/maaz-project/<id>', methods=['GET', 'POST'])
+
+@app.route("/maaz-project/<id>")
 def maaz_project(id):
-    post = PROJECT_POSTS.query.filter_by(id=id).first()
-    return render_template('specific-project.html', post=post)
+    post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
+    return render_template("maaz_project.html", post=post)
 
 with app.app_context():
     db.create_all()
