@@ -84,7 +84,7 @@ def add_new_project():
         title = request.form.get('title')
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
-        
+        img_filename = "" 
         img = request.files.get('image')  #
         if img and img.filename != '':
             filename = secure_filename(img.filename)
@@ -102,10 +102,11 @@ def add_new_project():
                                      )
             db.session.add(new_post)
             db.session.commit()
+            
             flash('ADDED','success')
         except Exception as e:
             flash(f'ERROR: {e}','danger')
-        
+        return render_template('new_pro.html')    
     
     return render_template('new_pro.html')
 
