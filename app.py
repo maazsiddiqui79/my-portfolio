@@ -118,12 +118,13 @@ def maaz_project(id):
 @app.route("/maaz-project-edit/<id>")
 def maaz_project_edit(id):
     post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
-    return render_template("specific-project.html", post=post)
+    return render_template("delete.html", post=post)
 
 @app.route("/delete-maaz-project/<id>")
 def delete_maaz_project(id):
     post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
     db.session.delete(post)
+    db.session.commit()
     p = PROJECT_POSTS.query.all()
     return render_template("index.html", all_post=p)
 
