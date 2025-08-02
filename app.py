@@ -77,6 +77,7 @@ Portfolio Website Notification System
 @app.route('/add-new-project', methods=['GET', 'POST'])
 def add_new_project():
     if request.method == 'POST':
+        print("POST request received")
         title = request.form.get('title')
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
