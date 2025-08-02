@@ -26,11 +26,13 @@ background-position: center;
 {% block body %}
 
 <div class="project-bg">
-    <p class="para"><span style="font-size:45px;">{{post.title}}</span><br>{{post.s_description}}</p>
+    <p class="para"><span style="font-size:45px;">{{post.title}}</span><br>{{post.s_description}}
+    <a href="/delete-maaz-project/{{post.id}}" >Delete  the projects</a>
+    </p>
     <!-- Content -->
 </div>
 <hr>
-<a href="/delete-maaz-project/{{post.id}}" class="btn btn-outline-dark">Delete  the projects</a>
+
 <hr>
 {{post.body|safe}}
 
