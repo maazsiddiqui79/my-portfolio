@@ -79,7 +79,9 @@ def add_new_project():
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
         img_filename = ""
-        img = request.files.get('image')
+
+        img = request.files['image'] if 'image' in request.files else None
+
         if img and img.filename != '':
             filename = secure_filename(img.filename)
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -94,13 +96,13 @@ def add_new_project():
             )
             db.session.add(new_post)
             db.session.commit()
-
             flash('ADDED', 'success')
         except Exception as e:
             flash(f'ERROR: {e}', 'danger')
         return render_template('new_pro.html')
 
     return render_template('new_pro.html')
+
 
 @app.route('/maaz-project/<id>', methods=['GET', 'POST'])
 def maaz_project(id):
