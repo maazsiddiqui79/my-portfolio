@@ -1,113 +1,66 @@
-{% extends 'base.html' %} 
-{% block title %}Maaz | Portfolio{% endblock %} 
-{% block head %}
+{% extends 'base.html' %} {% block title %}Maaz | Portfolio{% endblock %} {%
+block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-{% endblock %} 
+{% endblock %} {% block body %}
+<!-- First Look -->
 
-{% block body %}
-<div class="main-wrapper px-4 py-5" style="margin-top: 50px">
+<div class="container col-xxl-8 px-4 py-5">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-10 col-lg-6">
+    <div class="col-10 col-sm-12 col-lg-6">
       <img
-        src="{{url_for('static',filename='my_img.jpg')}}"
-        class="my-img"
-        alt="my img"
+        src="../static/my_img.jpg"
+        class="d-block mx-lg-auto img-fluid my-img"
+        alt="My Image"
+        loading="lazy"
       />
     </div>
-    <div class="col-lg-6 col-sm-12">
-      <h1 class="display-1 fw-bolder text-body-emphasis lh-1 mb-3">
-        <span style="color: rgba(13, 110, 253, 0.9); font-family: 'Cambria'">@</span>the-maaz
+    <div class="col-lg-6">
+      <h1 class="display-2  text-body-emphasis lh-1 mb-3">
+        <span class="fw-bold" style="color: rgba(13, 110, 253, 0.9); font-family: 'Cambria'"
+          >@</span
+        ><b>the-maaz</b>
       </h1>
-      <h4 class="display-6 fw-bold">Python Full Stack Developer</h4>
+      <h2 class="display-5  text-body-emphasis lh-1 mb-3">
+        Python Full Stack Developer
+      </h2>
 
-      <p class="display-7">
+      <p class="lead">
         A passionate Python developer and final-year diploma student
         specializing in full-stack development, automation, with a strong
         foundation in computer engineering.
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a
-          class="btn btn-outline-dark btn-lg px-4 me-md-2"
-          href="https://github.com/maazsiddiqui79"
-          target="_blank"
-        >
-          Git
-        </a>
-      </div>
-    </div>
-
-    <!--  -->
-  </div>
-</div>
-
-<hr class="custom-hr" />
-<div id="skills">{% include 'skills.html' %}</div>
-<hr class="custom-hr" />
-<div id="projects">{% include 'projects.html' %}</div>
-<hr class="custom-hr" />
-<div id="about">{% include 'about.html' %}</div>
-<hr class="custom-hr" />
-
-<section class="container col-xl-8">
-  <div class="row py-lg-5">
-    <div class="container col-xl-8 mt-5">
-      <h3 class="display-5 fw-bolder text-body-emphasis lh-1 mb-3" style="font-family: 'Cambria'">
-        MY DEVELOPER STATS
-      </h3>
-      <p class="lead text-body-secondary">Every Project Tells a Story.</p>
-    </div>
-  </div>
-</section>
-
-
-
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-    <div class="row justify-content-center">
-
-      <!-- Card 1: Projects Built -->
-      <div class="col-sm-6 col-lg-2 mb-4">
-        <div class="card1 ">
-          <figure class=" mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Completed <br>Projects</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+70</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-
-      <!-- Card 2: Deployed -->
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card1 ">
-          <figure class=" mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Deployed <br>Projects</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+5</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-      <!-- Card 2: Deployed -->
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card1 ">
-          <figure class=" mb-0">
-            <blockquote class="blockquote text-center">
-              <p style="padding: 1rem;">Gui <br>Applications</p>
-              <hr>
-              <span style="font-size: 2rem;"><strong>+6</strong></span>
-            </blockquote>
-          </figure>
-        </div>
-      </div>
-
-
+            <a
+              class="btn btn-outline-dark btn-lg px-4 me-md-2"
+              href="https://github.com/maazsiddiqui79"
+              target="_blank"
+            >
+              Git
+            </a>
+          </div>
     </div>
   </div>
 </div>
 
+<!-- End First Look -->
 <hr class="custom-hr" />
-<div id="connect">{% include 'connect.html' %}</div>
+<!-- Skills  -->
+ <div id="skills">{% include 'skills.html' %}</div>
+ <!-- End Skils -->
+ 
+ <!-- Projects  -->
+ <div id="projects">{% include 'projects.html' %}</div>
+ 
+ <!-- End Projects -->
+ 
+ <!-- About  -->
+ <div id="about">{% include 'about.html' %}</div>
+ 
+ <!-- End Projects -->
+ 
+ <!-- Connect  -->
+ <div id="connect">{% include 'connect.html' %}</div>
+ 
+<!-- End Connect -->
+
 {% endblock %}

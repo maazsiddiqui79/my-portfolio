@@ -20,7 +20,7 @@
             color: inherit;
             transition: all 0.3s ease-out;
             color: rgba(50, 50, 50, 0.913);
-            font-weight: bold;
+            
             text-decoration: none;
             padding-left: 10px;
             margin-left: 5px;
@@ -35,9 +35,8 @@
             box-shadow: 3px 3px 10px rgba(1, 1, 1, 0.2);
             transition: all 0.2s ease-in;
             transform-origin: center;
-padding-top: 1rem;
             text-decoration: underline;
-
+            border-bottom: 1.5px solid rgb(0, 0, 0);
             border-top: 1.5px solid rgb(0, 0, 0);
             
 
@@ -53,6 +52,7 @@ padding-top: 1rem;
         }
     </style>
     {% block head %}{% endblock %}
+    <link rel="shortcut icon" href="../static/icons-portfolio.png" type="image/x-icon">
     
 </head>
 
@@ -64,7 +64,7 @@ padding-top: 1rem;
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom fixed-top"
             style="background-color:whitesmoke;"> <a href="/"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <h5><span style="font-family: 'Cambria';">/siddiqui</span><strong>/maaz-/</strong></h5>
+                <h5><span style="font-family: 'Cambria';">/siddiqui</span>/maaz-/</h5>
                 <p class="nav nav-pills">
                     <a href="/" class="nav-link-header active-link" aria-current="page">Home</a> /
                     <a href="#projects" class="nav-link-header active-link">Project</a> /
@@ -79,22 +79,27 @@ padding-top: 1rem;
 
 </body>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center"> <a href="/"
-            class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap"> <svg
-                class="bi" width="30" height="24" aria-hidden="true">
-                <use xlink:href="#bootstrap"></use>
-            </svg> </a> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span> </div>
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Instagram"><svg class="bi" width="24"
-                    height="24" aria-hidden="true">
-                    <use xlink:href="#instagram"></use>
-                </svg></a></li>
-        <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24"
-                    height="24">
-                    <use xlink:href="#facebook"></use>
-                </svg></a></li>
-    </ul>
+  <footer style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;padding-left: 45px;"
+  class="d-flex flex-wrap  border-top"
+  >
+  <p class="footertext col-md-4 mb-0 text-body-secondary">
+    <br>
+    &COPY; 2025 Portfolio | <i>>Built by Maaz Siddiqui</i>
+  </p>
+  
+<ul class="nav col-md-4 justify-content-center">
+  <li class="nav-item">
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"><br>Top</a>
+  </li>
+  <li class="nav-item">
+    <a href="" class="nav-link px-2 text-body-secondary"></a>
+  </li>
+  
+</ul>
+<blockquote class="footertext">
+  <br />~Stay productive. Stay
+  organized
+</blockquote>
 </footer>
 
 </html>

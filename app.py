@@ -23,7 +23,9 @@ class PROJECT_POSTS(db.Model):
     s_description = db.Column(db.String,nullable=False)
     img = db.Column(db.String,nullable=False)
     body = db.Column(db.String,nullable=False)
-
+    
+    
+    
 @app.route('/',methods=['GET','POST'])
 def home_page():
     p = PROJECT_POSTS.query.all()
@@ -72,6 +74,7 @@ Portfolio Website Notification System
         print("Mail Sent")
         
     return render_template('index.html',all_post =p)
+
 
 
 @app.route('/add-new-project',methods=['GET','POST'])

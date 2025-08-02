@@ -1,47 +1,36 @@
+<!-- Heading -->
 <main>
-  <section class="container col-xl-8">
-    <div class="row py-lg-5">
-      <div class="container col-xl-8 mt-5">
-        <h3
-          class="display-5 fw-bolder text-body-emphasis lh-1 mb-3"
-          style="font-family: 'Cambria'"
-        >
-          SKILLS
-        </h3>
-        <p class="lead text-body-secondary">
-          Tools and skills I’ve focused on in the last 1.5 years
-        </p>
-      </div>
-    </div>
-
-     </section>
-</main>
-<div class="container mt-4">
-  <div class="row">
-
-    <!-- Group A: Frontend and Others -->
-    <div class="col-12 col-lg-6 mb-4">
-      <div class="d-flex flex-column gap-3">
-        <div class="skills-div-right-side ms-2">
-            {% include 'frontend.html' %}
+    <section class="container col-xl-8">
+        <div class="row py-lg-5">
+            <div class="container col-xl-8 mt-5" style="border-left: 2px black solid;margin:1rem;height:150px;padding-left: 30px;">
+                <h3
+                class="display-5 fw-bolder fw-bolder text-body-emphasis lh-1 mb-3"
+                style="font-family: 'Cambria'"
+                >
+                SKILLS
+            </h3>
+            <p class="lead text-body-secondary">
+                Tools and skills I’ve focused on in the last 1.5 years
+            </p>
         </div>
-        <div class="skills-div-right-side ms-2 mb-4">
-            {% include 'others.html' %}
-            
-        </div>
-        
-      </div>
     </div>
     
-    <!-- Group B: Backend -->
-    <div class="col-12 col-xl-6 mb-4">
-        <div class="d-flex flex-column gap-3">
-            <div class="skills-div-left-side">{% include 'backend.html' %}
+</section>
+</main>
 
-        </div>
+<!-- content -->
 
-      </div>
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-12 col-sm-12 col-lg-6">
+      
+        {% include 'backend.html' %}
+        
     </div>
+    <div class="col-lg-5">
 
-  </div>
+        {% include 'frontend.html' %}
+        <br>
+        {% include 'others.html' %}
+    </div>
 </div>
