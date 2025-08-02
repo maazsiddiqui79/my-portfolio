@@ -75,12 +75,14 @@ Portfolio Website Notification System
 @app.route('/add-new-project', methods=['GET', 'POST'])
 def add_new_project():
     if request.method == 'POST':
+        print('+=========================================REACHED New project=========================================+')
         title = request.form.get('title')
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
         img_filename = ""
 
         img = request.files['image'] if 'image' in request.files else None
+        
 
         if img and img.filename != '':
             filename = secure_filename(img.filename)
@@ -94,6 +96,7 @@ def add_new_project():
                 img=img_filename,
                 body=body
             )
+            print(title,img_filename,img,body)
             db.session.add(new_post)
             db.session.commit()
             flash('ADDED', 'success')
@@ -107,8 +110,9 @@ def add_new_project():
 
 @app.route("/maaz-project/<id>")
 def maaz_project(id):
+    print('+=========================================REACHED View Project=========================================+')
     post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
-    return render_template("maaz_project.html", post=post)
+    return render_template("specific-project.html", post=post)
 
 with app.app_context():
     db.create_all()
