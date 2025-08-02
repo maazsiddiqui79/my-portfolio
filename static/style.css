@@ -34,9 +34,10 @@
         margin-left: 5rem;
         margin-right: 5rem;
     }
+        right
 } */
 
-body {
+body { 
     font-family: 'Courier New';
     padding-left: 2rem;
     /* margin-right: 10rem; */
@@ -99,6 +100,10 @@ small {
     color: white;
 }
 
+.maaz{
+    width: 1000px;
+}
+
 
 
 .card:hover .card-text-hover {
@@ -111,7 +116,7 @@ small {
     width: 300px;
     height: 300px;
     margin-left: 3rem;
-    padding-right: 3rem;
+    
 }
 
 .skills-div-right-side,.skills-div-left-side{
