@@ -1,33 +1,31 @@
-from flask import Flask,render_template ,redirect , url_for ,request , flash
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
 import smtplib
-
+import traceback
 
 app = Flask(__name__)
+app.debug = True  # Debug mode enabled
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://go_todo_task_db_user:z3YSJb1og6V5aDVXuJqv9Kgsn7VgBpTO@dpg-d20liqndiees739m4op0-a.oregon-postgres.render.com/go_todo_task_db'
-# app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///my_databse.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] =False
-db =SQLAlchemy(app=app)
-ckeditor = CKEditor(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'your_secret_key'
-UPLOAD_FOLDER = 'static/uploads'  # make sure this folder exists
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+db = SQLAlchemy(app=app)
+ckeditor = CKEditor(app)
 
 class PROJECT_POSTS(db.Model):
     __tablename__ = 'PROJECTS'
-    id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String,unique=True )
-    s_description = db.Column(db.String,nullable=False)
-    img = db.Column(db.String,nullable=False)
-    body = db.Column(db.String,nullable=False)
-    
-    
-    
-@app.route('/',methods=['GET','POST'])
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, unique=True)
+    s_description = db.Column(db.String, nullable=False)
+    img = db.Column(db.String, nullable=False)
+    body = db.Column(db.String, nullable=False)
+
+@app.route('/', methods=['GET', 'POST'])
 def home_page():
     p = PROJECT_POSTS.query.all()
     if request.method == 'POST':
@@ -36,13 +34,10 @@ def home_page():
         phoneno = request.form.get('phoneno')
         email = request.form.get('email')
         msg = request.form.get('msg')
-        print(name,email,
-          phoneno,
-          subject,msg)
-        
+        print(name, email, phoneno, subject, msg)
+
         sender_mail = "maaz.irshad.siddiqui@gmail.com"
-        # sender_mail = email
-        password ="tvud sggg rdle ywll"
+        password = "tvud sggg rdle ywll"
         message = f"""Subject: New Portfolio Contact Form Submission
 
 Dear Admin,
@@ -64,61 +59,55 @@ Please respond to the sender at your earliest convenience.
 Best regards,  
 Portfolio Website Notification System
 """
-
-        with smtplib.SMTP_SSL("smtp.gmail.com",port=465) as connection:
-                connection.login(user=sender_mail,password=password)
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", port=465) as connection:
+                connection.login(user=sender_mail, password=password)
                 connection.sendmail(
                     from_addr=sender_mail,
                     to_addrs='siddiqui.maaz79@gmail.com',
                     msg=message.encode("utf-8")
                 )
-        print("Mail Sent")
-        
-    return render_template('index.html',all_post =p)
+            print("Mail Sent")
+        except Exception as e:
+            print("Mail sending failed:", e)
+            traceback.print_exc()
 
+    return render_template('index.html', all_post=p)
 
-
-@app.route('/add-new-project',methods=['GET','POST'])
+@app.route('/add-new-project', methods=['GET', 'POST'])
 def add_new_project():
     if request.method == 'POST':
         title = request.form.get('title')
         short_desc = request.form.get('short_desc')
         body = request.form.get('body')
-        img_filename = "" 
-        img = request.files.get('image')  #
+        img_filename = ""
+        img = request.files.get('image')
         if img and img.filename != '':
             filename = secure_filename(img.filename)
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             img_filename = filename
-        
-        
-        # testing purpose
-        # print(title,desc,tech_used,git_link,live)
+
         try:
-            new_post = PROJECT_POSTS(title=title,
-                                     s_description=short_desc,
-                                     img =img_filename,
-                                     body=body
-                                     )
+            new_post = PROJECT_POSTS(
+                title=title,
+                s_description=short_desc,
+                img=img_filename,
+                body=body
+            )
             db.session.add(new_post)
             db.session.commit()
-            
-            flash('ADDED','success')
+            flash('ADDED', 'success')
         except Exception as e:
-            flash(f'ERROR: {e}','danger')
-        return render_template('new_pro.html')    
-    
+            flash(f'ERROR: {e}', 'danger')
+            traceback.print_exc()
+        return render_template('new_pro.html')
+
     return render_template('new_pro.html')
 
-
-
-@app.route('/maaz-project/<id>',methods=['GET','POST'])
+@app.route('/maaz-project/<id>', methods=['GET', 'POST'])
 def maaz_project(id):
-    post  = PROJECT_POSTS.query.filter_by(id=id).first()
-    return render_template('specific-project.html',post=post)
-
-
-
+    post = PROJECT_POSTS.query.filter_by(id=id).first()
+    return render_template('specific-project.html', post=post)
 
 with app.app_context():
     db.create_all()
