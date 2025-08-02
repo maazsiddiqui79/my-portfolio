@@ -14,7 +14,7 @@ body {
     justify-content: center;     
     margin-top: 50px;
     filter: grayscale(95%) opacity(75%);
-    transition: box-shadow 0.6s ease-in-out, transform 0.3s ease-in-out;
+    transition: box-shadow 0.4s ease-out, transform 0.3s ease-in-out;
     
 }
 /* Default hover effect (for desktops/larger screens) */
