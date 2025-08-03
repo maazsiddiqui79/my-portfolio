@@ -10,6 +10,10 @@ body {
 }
 }
 
+.btnn{
+    border: none;
+}
+
 /* Intro */
 .my-img {
     width: 360px;
