@@ -5,6 +5,7 @@ from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
 import smtplib
 
+
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://go_todo_task_db_user:z3YSJb1og6V5aDVXuJqv9Kgsn7VgBpTO@dpg-d20liqndiees739m4op0-a.oregon-postgres.render.com/go_todo_task_db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_databse.db'
@@ -132,4 +133,4 @@ with app.app_context():
     db.create_all()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(port=5000, debug=True)
