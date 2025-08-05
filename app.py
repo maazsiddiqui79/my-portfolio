@@ -127,7 +127,8 @@ def delete_maaz_project(id):
     db.session.delete(post)
     db.session.commit()
     
-    return redirect(url_for('home_page'))
+    post = PROJECT_POSTS.query.all()
+    return render_template("delete.html", post=post)
 
 with app.app_context():
     db.create_all()
