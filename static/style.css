@@ -7,20 +7,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 30px;
     filter: grayscale(95%) opacity(75%);
-    transition: box-shadow 0.4s ease-out, transform 0.3s ease-in-out;
+    transition: all 0.4s ease-out, transform 0.9s ease-in-out;
 
 }
 
 /* Default hover effect (for desktops/larger screens) */
 .my-img:hover {
+
+    border-radius: 5px;
     box-shadow: 0 0 15px 10px rgba(13, 110, 253, 0.9);
-    transform: translateX(-5px) scale(1.1);
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
-    margin-top: 50px;
+    transform: translateX(-5px) scale(1.07);
+    width: 366px;
+    height: 365px;
+    border-radius: 15%;
+    margin-top: 30px;
 
     filter: grayscale(0%);
 }
@@ -33,7 +35,7 @@
         max-width: 280px;
         height: 300px;
         border-radius: 50%;
-        margin-top: 50px;
+        margin-top: 55px;
         filter: grayscale(95%) opacity(75%);
         transition: box-shadow 0.6s ease-in-out, transform 0.3s ease-in-out;
     }
@@ -44,7 +46,7 @@
         max-width: 280px;
         height: 300px;
         border-radius: 50%;
-        margin-top: 50px;
+        margin-top: 55px;
 
         filter: grayscale(0%);
     }
@@ -76,7 +78,8 @@
     transition: all 0.5s ease-in-out;
     background-size: cover;
     background-position: center;
-    width: 350px;
+
+    width: 360px;
     height: 750px;
     /* margin-left: 4rem; */
 }
@@ -105,39 +108,41 @@ small {
 }
 
 
-    
-    
-    @media (max-width: 991.98px) {
-        
-        .card1 {
-            padding-left: 10px;
-            padding-top: 45px;
-            padding-bottom: 45px;
-            padding-right: 10px;
-            width: 450px;
-            
-        }
+
+
+@media (max-width: 991.98px) {
+
+    .card1 {
+        padding-left: 10px;
+        padding-top: 45px;
+        padding-bottom: 45px;
+        padding-right: 10px;
+        width: 450px;
+
     }
+}
 
 
 .contact-box {
-  background-color: antiquewhite;
-  width: 100%;
-  max-width: 365px;
-  margin: 0 auto;
-  padding: 10px;
-  margin-bottom: 1rem;
+    background-color: antiquewhite;
+    width: 100%;
+    max-width: 365px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-bottom: 1rem;
 }
 
 
 .card2 {
-    
+
     width: 100%;
-    
+
     padding: 2rem;
     border-radius: 10px;
 }
 
 
-
-
+.hrr {
+    width: 600px;
+    margin: 0 auto;
+}
