@@ -1,5 +1,11 @@
+
+
+
 from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_sqlalchemy import SQLAlchemy
+from models import PROJECT_POSTS ,db
+from add_new_porc import add_new_proc
+from edit_all_proc import delete_proc ,edit_proc
+
 import os
 from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
@@ -10,26 +16,24 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg://go_todo_task_db_user:z3YSJb1og6V5aDVXuJqv9Kgsn7VgBpTO@dpg-d20liqndiees739m4op0-a.oregon-postgres.render.com/go_todo_task_db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_databse.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app=app)
+app.register_blueprint(edit_proc,url_prefix="")
+app.register_blueprint(delete_proc,url_prefix="")
+
 ckeditor = CKEditor(app)
 app.secret_key = 'your_secret_key'
-UPLOAD_FOLDER = 'static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Set config before blueprint registration
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# ✅ Ensure the upload folder exists (non-intrusive, does not change logic)
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# Initialize database with app
+db.init_app(app)
 
-class PROJECT_POSTS(db.Model):
-    __tablename__ = 'PROJECTS'
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, unique=True)
-    s_description = db.Column(db.String, nullable=False)
-    img = db.Column(db.String, nullable=False)
-    body = db.Column(db.String, nullable=False)
-    
-    def __repr__(self):
-        return f"<PROJECT_POSTS(id={self.id}, title='{self.title}'),DESC={self.s_description}>"
-    
+# Import blueprint after app and db are ready
+from add_new_porc import add_new_proc
+
+# Register blueprint
+app.register_blueprint(add_new_proc)
+
+
     
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
@@ -78,39 +82,6 @@ Portfolio Website Notification System
 
     return render_template('index.html', all_post=p)
 
-@app.route('/add-new-project', methods=['GET', 'POST'])
-def add_new_project():
-    if request.method == 'POST':
-        print('+=========================================REACHED New project=========================================+')
-        title = request.form.get('title')
-        short_desc = request.form.get('short_desc')
-        body = request.form.get('body')
-        img_filename = ""
-
-        img = request.files['image'] if 'image' in request.files else None
-        
-
-        if img and img.filename != '':
-            filename = secure_filename(img.filename)
-            img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            img_filename = filename
-
-        try:
-            new_post = PROJECT_POSTS(
-                title=title,
-                s_description=short_desc,
-                img=img_filename,
-                body=body
-            )
-            print(title,img_filename,img,body)
-            db.session.add(new_post)
-            db.session.commit()
-            flash('ADDED', 'success')
-        except Exception as e:
-            flash(f'ERROR: {e}', 'danger')
-        return render_template('new_pro.html')
-
-    return render_template('new_pro.html')
 
 
 
@@ -121,22 +92,10 @@ def maaz_project(id):
     return render_template("specific-project.html", post=post)
 
 
-@app.route("/maaz-project-edits/")
-def maaz_project_edit():
-    post = PROJECT_POSTS.query.all()
-    return render_template("delete.html", post=post)
 
-@app.route("/delete-maaz-project/<id>")
-def delete_maaz_project(id):
-    post = PROJECT_POSTS.query.filter_by(id=int(id)).first()
-    db.session.delete(post)
-    db.session.commit()
-    
-    post = PROJECT_POSTS.query.all()
-    return render_template("delete.html", post=post)
 
-with app.app_context():
-    db.create_all()
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    with app.app_context():
+        db.create_all()  # Create tables before first request
+    app.run(debug=True)
